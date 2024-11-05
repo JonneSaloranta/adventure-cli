@@ -1,9 +1,10 @@
 
 from src.world.world_gen import WorldGenerator
+from src.world.tile import Tile
 
 
 class World:
-    def __init__(self, width=256, height=256, chunk_size=16, seed=""):
+    def __init__(self, width=256, height=256, chunk_size=16, seed=None):
         self.width = width
         self.height = height
         self.chunk_size = chunk_size
@@ -17,9 +18,13 @@ class World:
                 self.chunks[(x, y)] = self.generator.generate_chunk(x, y, self.chunk_size)
 
     def get_chunk(self, x, y):
+        # raise error if chunk location is not valid
+        if x < 0 or x >= self.width or y < 0 or y >= self.height:
+            raise ValueError("Chunk is out of bounds.")
+
         return self.chunks.get((x, y))
     
-    def get_tile(self, x, y):
+    def get_tile(self, x, y) -> Tile:
         chunk_x = x // self.chunk_size
         chunk_y = y // self.chunk_size
         chunk = self.get_chunk(chunk_x, chunk_y)
@@ -35,17 +40,41 @@ class World:
             chunk[x % self.chunk_size][y % self.chunk_size] = tile
         return None
     
-    def get_width(self):
+    def get_width(self) -> int:
         return self.width
     
-    def get_height(self):
+    def get_height(self) -> int:
         return self.height
     
-    def get_chunk_size(self):
+    def get_chunk_size(self) -> int:
         return self.chunk_size
     
-    def get_seed(self):
+    def get_seed(self) -> str:
         return self.seed
     
-    def get_chunks(self):
+    def get_chunks(self) -> dict:
         return self.chunks
+
+
+if __name__ == "__main__":
+
+    from rich import print
+    from rich.console import Console
+    from rich.table import Table
+    from rich.panel import Panel
+    
+    console = Console()
+
+    world = World(width=10, height=10, seed="test")
+    world.generate_world()
+
+    table = Table(box=None, show_header=False, show_edge=False)
+
+
+    chunk = world.get_chunk(0, 0)
+    # print(chunk)
+
+    for row in chunk:
+        table.add_row("".join([tile.get_symbol() for tile in row]))
+        
+    console.print(Panel(table, title="2D CLI World", border_style="blue"))
