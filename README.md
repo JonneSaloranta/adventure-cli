@@ -1,3 +1,5 @@
+[![Python 3.8 Tests](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-8.yaml/badge.svg)](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-8.yaml) [![Python 3.9 Tests](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-9.yaml/badge.svg)](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-9.yaml) [![Python 3.10 Tests](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-10.yaml/badge.svg)](https://github.com/JonneSaloranta/adventure-cli/actions/workflows/unit-tests-python-3-10.yaml)
+
 # A demo CLI Adventure game project
 
 This is a simple CLI adventure game project for the purpose of demonstrating the use of unit testing in Python.
