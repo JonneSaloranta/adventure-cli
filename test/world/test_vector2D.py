@@ -1,6 +1,6 @@
 import unittest
 
-from src.world.vector2D import Vector2D
+from src.util.vector2D import Vector2D
 
 class TestVector2D(unittest.TestCase):
     
@@ -95,4 +95,4 @@ class TestVector2D(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(verbosity=2)

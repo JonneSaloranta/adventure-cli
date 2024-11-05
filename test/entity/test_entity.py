@@ -1,7 +1,7 @@
 import unittest
 
 from src.entity.entity import Entity
-from src.world.vector2D import Vector2D
+from src.util.vector2D import Vector2D
 
 class TestEntity(unittest.TestCase):
 
