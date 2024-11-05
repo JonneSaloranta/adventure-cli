@@ -1,6 +1,6 @@
 
 from .human import Human
-from src.world.vector2D import Vector2D
+from src.util.vector2D import Vector2D
 
 class Player(Human):
     def __init__(self, name: str, description: str, position: Vector2D):
