@@ -43,6 +43,39 @@ class TestWorld(unittest.TestCase):
         self.assertRaises(ValueError, self.world.get_chunk, -1, -1)
         self.assertRaises(ValueError, self.world.get_chunk, 10, 10)
 
+    def test_get_name(self):
+        self.assertEqual(self.world.get_name(), "World")
+
+    def test_set_name(self):
+        self.world.set_name("Test")
+        self.assertEqual(self.world.get_name(), "Test")
+
+    def test_to_dict(self):
+        self.assertEqual(self.world.to_dict(), {
+            "name": "World",
+            "width": 10,
+            "height": 10,
+            "chunk_size": 16,
+            "seed": "test",
+            "chunks": {}
+        })
+
+    def test_from_dict(self):
+        data = {
+            "name": "Test",
+            "width": 20,
+            "height": 20,
+            "chunk_size": 32,
+            "seed": "test",
+            "chunks": {}
+        }
+        self.world.from_dict(data)
+        self.assertEqual(self.world.get_name(), "Test")
+        self.assertEqual(self.world.get_width(), 20)
+        self.assertEqual(self.world.get_height(), 20)
+        self.assertEqual(self.world.get_chunk_size(), 32)
+        self.assertEqual(self.world.get_seed(), "test")
+        self.assertEqual(self.world.get_chunks(), {})
     
 
 if __name__ == "__main__":
