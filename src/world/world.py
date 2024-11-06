@@ -4,7 +4,8 @@ from src.world.tile import Tile
 
 
 class World:
-    def __init__(self, width=256, height=256, chunk_size=16, seed=None):
+    def __init__(self, name: str = "World", width: int = 256, height: int = 256, chunk_size: int = 16, seed=None):
+        self.name = name
         self.width = width
         self.height = height
         self.chunk_size = chunk_size
@@ -17,7 +18,7 @@ class World:
             for y in range(self.height):
                 self.chunks[(x, y)] = self.generator.generate_chunk(x, y, self.chunk_size)
 
-    def get_chunk(self, x, y):
+    def get_chunk(self, x, y) -> list:
         # raise error if chunk location is not valid
         if x < 0 or x >= self.width or y < 0 or y >= self.height:
             raise ValueError("Chunk is out of bounds.")
@@ -54,6 +55,30 @@ class World:
     
     def get_chunks(self) -> dict:
         return self.chunks
+    
+    def get_name(self) -> str:
+        return self.name
+    
+    def set_name(self, name: str):
+        self.name = name
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "width": self.width,
+            "height": self.height,
+            "chunk_size": self.chunk_size,
+            "seed": self.seed,
+            "chunks": self.chunks
+        }
+    
+    def from_dict(self, data: dict):
+        self.name = data.get("name")
+        self.width = data.get("width")
+        self.height = data.get("height")
+        self.chunk_size = data.get("chunk_size")
+        self.seed = data.get("seed")
+        self.chunks = data.get("chunks")
 
 
 if __name__ == "__main__":
